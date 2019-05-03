@@ -1,0 +1,30 @@
+{
+  "name": "forkify",
+  "version": "1.0.0",
+  "description": "A project to display Cooking Recipes :)",
+  "main": "index.js",
+  "scripts": {
+    "dev": "webpack --mode development",
+    "build": "webpack --mode production",
+    "start": "webpack-dev-server --mode development --open"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MikevPeeren/Forkify.git"
+  },
+  "author": "Mike van Peeren",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MikevPeeren/Forkify/issues"
+  },
+  "homepage": "https://github.com/MikevPeeren/Forkify#readme",
+  "devDependencies": {
+    "html-webpack-plugin": "^3.2.0",
+    "webpack": "^4.30.0",
+    "webpack-cli": "^3.3.1",
+    "webpack-dev-server": "^3.3.1"
+  },
+  "dependencies": {
+    "jquery": "^3.4.1"
+  }
+}
