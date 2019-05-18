@@ -4,6 +4,7 @@ import {
     clearLoader,
 } from './views/base';
 import * as searchView from './views/searchView';
+import * as recipeView from './views/recipeView';
 import Search from './models/Search';
 import Recipe from './models/Recipe';
 
@@ -70,23 +71,32 @@ const controlRecipe = async () => {
     if (id) {
         const encodedID = encodeURIComponent(id);
         // Prepare UI for changes.
+        recipeView.clearRecipe();
+        renderLoader(elements.recipe);
+
+        // Highlight selected search Item.
+        if(state.search) searchView.highlightSelected(id);
 
         // Create new Recipe Object.
         state.recipe = new Recipe(encodedID);
 
         try {
-            // Get Recipe Data.
+            // Get Recipe Data and parse Ingredients
             await state.recipe.getRecipe();
+            state.recipe.parseIngredients();
 
             // Calculate Servings and Time.
             state.recipe.calcTime();
             state.recipe.calcServings();
 
             // Render Recipe.
-            console.log(state.recipe);
-        } catch (error) {
-            console.log('Error Processing Recipe!');
+            clearLoader();
+            recipeView.renderRecipe(state.recipe);
 
+        } catch (error) {
+            clearLoader();
+            recipeView.clearRecipe();
+            console.log('Error Processing Recipe!');
         }
     }
 };
