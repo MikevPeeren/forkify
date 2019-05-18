@@ -5,6 +5,7 @@ import {
 } from './views/base';
 import * as searchView from './views/searchView';
 import Search from './models/Search';
+import Recipe from './models/Recipe';
 
 /**
  * Global State of the App
@@ -15,6 +16,9 @@ import Search from './models/Search';
  */
 const state = {};
 
+/**
+ * Search Controller
+ */
 const controlSearch = async () => {
     // 1. Get Query from View.
     const query = searchView.getInput();
@@ -28,12 +32,17 @@ const controlSearch = async () => {
         searchView.clearResults();
         searchView.clearInput();
 
-        // 4. Search for Recipes
-        await state.search.getResults();
+        try {
+            // 4. Search for Recipes
+            await state.search.getResults();
 
-        // 5. Render Results on UI
-        clearLoader();
-        searchView.renderResults(state.search.result);
+            // 5. Render Results on UI
+            clearLoader();
+            searchView.renderResults(state.search.result);
+        } catch (error) {
+            console.log('Could not get any Recipes.');
+            clearLoader();
+        }
     }
 }
 
@@ -50,3 +59,36 @@ elements.searchResultsPages.addEventListener('click', e => {
         searchView.renderResults(state.search.result, goToPage);
     }
 });
+
+/**
+ * Recipe Controller
+ */
+const controlRecipe = async () => {
+    // Get ID from Url
+    const id = window.location.hash.replace('#', '');
+
+    if (id) {
+        const encodedID = encodeURIComponent(id);
+        // Prepare UI for changes.
+
+        // Create new Recipe Object.
+        state.recipe = new Recipe(encodedID);
+
+        try {
+            // Get Recipe Data.
+            await state.recipe.getRecipe();
+
+            // Calculate Servings and Time.
+            state.recipe.calcTime();
+            state.recipe.calcServings();
+
+            // Render Recipe.
+            console.log(state.recipe);
+        } catch (error) {
+            console.log('Error Processing Recipe!');
+
+        }
+    }
+};
+
+['hashchange', 'load'].forEach(event => window.addEventListener(event, controlRecipe));

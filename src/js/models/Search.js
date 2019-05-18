@@ -1,10 +1,5 @@
 import Axios from "axios";
-
-const crossOrigin = 'https://cors-anywhere.herokuapp.com/';
-const apiUrlSearch = 'https://api.edamam.com/search';
-const apiID = '61bf74ca';
-const apiKey = 'b561ba101ef1978aa77b13a4aeaacb8c';
-const apiTo = 40;
+import configClass from '../config';
 
 export default class Search {
     constructor(query) {
@@ -13,10 +8,10 @@ export default class Search {
 
     async getResults(query) {
         try {
-            const res = await Axios(`${crossOrigin}${apiUrlSearch}?q=${this.query}&app_id=${apiID}&app_key=${apiKey}&to=${apiTo}`);
+            const res = await Axios(`${configClass.crossOrigin}${configClass.apiUrlSearch}?q=${this.query}&app_id=${configClass.apiID}&app_key=${configClass.apiKey}&to=${configClass.apiTo}`);
             this.result = res.data.hits;
         } catch (error) {
-            alert(error)
+            console.log(error);
         }
     }
 }

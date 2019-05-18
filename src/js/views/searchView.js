@@ -30,11 +30,11 @@ const limitRecipeTitle = (title, limit = 17) => {
     return title;
 }
 
-const renderRecipe = item => {
+export const renderRecipe = item => {
     const markup =
-        `
+    `
     <li>
-        <a class="results__link" href="${item.recipe.url}">
+        <a class="results__link" href="#${item.recipe.uri}">
             <figure class="results__fig">
                 <img src="${item.recipe.image}" alt="${item.recipe.label}">
             </figure>
@@ -61,8 +61,6 @@ const createButton = (page, type) => `
 const renderButtons = (page, numResults, resPerPage) => {
     const pages = Math.ceil(numResults / resPerPage);
     let button;
-    console.log(page);
-    console.log(pages);
     if (page === 1 && pages > 1) {
         // Only Button to go to Next Page.
         button = createButton(page, 'next');
@@ -86,7 +84,8 @@ export const renderResults = (recipes, page = 1, resPerPage = 10) => {
     const start = (page - 1) * resPerPage;
     const end = page * resPerPage;
 
-    recipes.slice(start, end).forEach(renderRecipe);
-
-    renderButtons(page, recipes.length, resPerPage);
+    if('undefined' !== typeof recipes){
+        recipes.slice(start, end).forEach(renderRecipe);
+        renderButtons(page, recipes.length, resPerPage);
+    }
 };

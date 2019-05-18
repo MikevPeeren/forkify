@@ -189,6 +189,7 @@ body {
     color: #968B87;
     font-size: 1.2rem;
     margin-top: auto;
+    text-align: center;
 }
 
 .link:link,
@@ -319,7 +320,7 @@ body {
     list-style: none;
 }
 
-.results__link:link,
+.results__link,
 .results__link:visited,
 .likes__link:link,
 .likes__link:visited {
@@ -333,6 +334,7 @@ body {
 
 .results__link:hover,
 .likes__link:hover {
+    cursor: pointer;
     background-color: #F9F5F3;
     transform: translateY(-2px);
 }
