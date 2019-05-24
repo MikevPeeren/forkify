@@ -4,7 +4,7 @@ import configClass from '../config';
 export default class Recipe {
     constructor(id) {
         this.id = id;
-    }
+    };
 
     async getRecipe() {
         try {
@@ -18,18 +18,18 @@ export default class Recipe {
         } catch (error) {
             console.log('Something went wrong :(');
         }
-    }
+    };
 
     calcTime() {
         // Assuming that we need 15 min for each 3 Ingredients.
         const numIng = this.ingredients.length;
         const periods = numIng / 3;
         this.time = periods * 15;
-    }
+    };
 
     calcServings() {
         this.servings = 4;
-    }
+    };
 
     parseIngredients() {
         const unitsLong = ['tablespoons', 'tablespoon', 'ounces', 'ounce', 'teaspoons', 'teaspoon', 'cups', 'pounds'];
@@ -86,5 +86,17 @@ export default class Recipe {
             return objectIngredient;
         });
         this.ingredients = newIngredients;
+    };
+
+    updateServings(type) {
+        // Servings
+        const newServings = type === 'dec' ? this.servings - 1 : this.servings + 1;
+
+        // Ingredients
+        this.ingredients.forEach(ing => {
+            ing.count = ing.count * (newServings / this.servings);
+        });
+        
+        this.servings = newServings;
     }
 }
