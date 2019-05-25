@@ -5,6 +5,10 @@ export default class List {
         this.items = [];
     };
 
+    getItem(id) {
+        return this.items.find(element => element.id === id);
+    };
+
     addItem(count, unit, ingredient) {
         const item = {
             id: uniqid(),
@@ -13,7 +17,7 @@ export default class List {
             ingredient
         }
         this.items.push(item);
-        
+
         return item;
     };
 

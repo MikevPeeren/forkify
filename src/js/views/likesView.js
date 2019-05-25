@@ -13,7 +13,7 @@ export const toggleLikeMenu = numLikes => {
 };
 
 export const renderLike = like => {
-    let href = decodeURIComponent(like.id);
+    const href = decodeURIComponent(like.id);
     const markup = `
         <li>
             <a class="likes__link" href="#${href}">
@@ -31,6 +31,7 @@ export const renderLike = like => {
 };
 
 export const deleteLike = id => {
-    const el = document.querySelector(`.likes__link[href*="${id}"]`).parentElement;
+    const href = decodeURIComponent(id);
+    const el = document.querySelector(`.likes__link[href*="${href}"]`).parentElement;
     if (el) el.parentElement.removeChild(el);
 }

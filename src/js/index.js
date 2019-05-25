@@ -103,7 +103,7 @@ const controlRecipe = async () => {
         } catch (error) {
             clearLoader();
             recipeView.clearRecipe();
-            console.log('Error Processing Recipe!' + error);
+            console.log('Error Processing Recipe!');
         }
     }
 };
@@ -138,7 +138,12 @@ elements.shoppingList.addEventListener('click', e => {
     } // Handle Count update
     else if (e.target.matches('.shopping__count-value')) {
         const val = parseFloat(e.target.value, 10);
-        state.list.updateCount(id.value);
+        if (Math.sign(val) === 1) {
+            state.list.updateCount(id, val);
+        }else{
+            const item = state.list.getItem(id);
+            e.target.value = item.count;
+        }
     }
 });
 
@@ -152,11 +157,9 @@ const controlLike = () => {
     const currentID = state.recipe.id;
     // User has NOT yet liked current Recipe.
     if (!state.likes.isLiked(currentID)) {
-        console.log(state.recipe);
-        
         // Add like to the state.
         const newLike = state.likes.addLike(
-            currentID, 
+            currentID,
             state.recipe.url,
             state.recipe.title,
             state.recipe.author,
