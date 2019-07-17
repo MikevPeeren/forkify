@@ -1,3 +1,2 @@
 # Forkify
-
-This is a project to search the web for Cooking Recipes.
+A website to search for certain Cooking Recipes.
