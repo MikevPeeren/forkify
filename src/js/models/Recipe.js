@@ -8,7 +8,7 @@ export default class Recipe {
 
     async getRecipe() {
         try {
-            const res = await Axios(`${configClass.crossOrigin}${configClass.apiUrlSearch}?r=${this.id}&app_id=${configClass.apiID}&app_key=${configClass.apiKey}`);
+            const res = await Axios(`${configClass.apiUrlSearch}?r=${this.id}&app_id=${configClass.apiID}&app_key=${configClass.apiKey}`);
             const resData = res.data[0];
             this.title = resData.label;
             this.author = resData.source;
