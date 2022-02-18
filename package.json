@@ -20,7 +20,7 @@
   },
   "homepage": "https://github.com/MikevPeeren/Forkify#readme",
   "devDependencies": {
-    "@babel/core": "^7.17.4",
+    "@babel/core": "^7.17.5",
     "@babel/preset-env": "^7.16.11",
     "babel-loader": "^8.2.3",
     "html-webpack-plugin": "^3.2.0",
