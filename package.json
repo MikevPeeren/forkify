@@ -30,7 +30,7 @@
   },
   "dependencies": {
     "@babel/polyfill": "^7.12.1",
-    "axios": "^0.27.0",
+    "axios": "^0.27.1",
     "fractional": "^1.0.0",
     "gh-pages": "^3.2.3",
     "jquery": "^3.6.0",
