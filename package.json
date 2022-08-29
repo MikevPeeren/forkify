@@ -33,7 +33,7 @@
     "axios": "^0.27.2",
     "fractional": "^1.0.0",
     "gh-pages": "^4.0.0",
-    "jquery": "^3.6.0",
+    "jquery": "^3.6.1",
     "uniqid": "^5.4.0"
   }
 }
